@@ -1,0 +1,3 @@
+requests
+python-dotenv
+git+https://github.com/Polymarket/py-clob-client.git
