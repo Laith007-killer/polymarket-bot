@@ -1,0 +1,20 @@
+name: Polymarket Bot
+on:
+  schedule:
+    - cron: '*/5 * * * *'
+  workflow_dispatch:
+
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - name: Install dependencies
+        run: pip install requests python-dotenv git+https://github.com/Polymarket/py-clob-client.git
+      - name: Run bot
+        env:
+          POLYMARKET_KEY: ${{ secrets.POLYMARKET_KEY }}
+        run: python copy_trade.py
